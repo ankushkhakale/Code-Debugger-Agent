@@ -17,7 +17,19 @@ def debug_code(code_snippet, language ="Python"):
     else:
         return f"Error:{response.text}"
     
-#Test code debugger
-if __name__ == "__main__":
-    test_code = "def add_numbers(a,b): return a+b\n print(add_numbers(5))"
-    print(debug_code(test_code))
+# #Test code debugger
+# if __name__ == "__main__":
+#     test_code = "def add_numbers(a,b): return a+b\n print(add_numbers(5))"
+#     print(debug_code(test_code))
+
+#Gradio Interface
+interface = gr.Interface(
+    fn =debug_code,
+    inputs=[
+        gr.Textbox(lines=10, label="Code Snippet"),
+        gr.Dropdown(choices=["Python", "JavaScript", "Java", "C++", "Ruby"], label="Programming Language", value="Python")
+    ],
+    outputs=gr.Textbox(label="AI Debugger Output"),
+    title="AI Code Debugger",
+    description="Paste your code snippet and select the programming language to get debugging suggestions from the AI.",
+)
